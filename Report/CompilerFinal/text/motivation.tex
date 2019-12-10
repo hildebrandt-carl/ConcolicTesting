@@ -1,0 +1,28 @@
+\section{Motivation}
+As software systems get larger, symbolic execution is less likely to be able to perform an efficient, correct analysis to generate inputs that tests all paths of execution.
+At the same time, concrete execution using a fuzzing tool that generates random input will not be able to exhaustively test these systems. There is no guarantee that 
+a fuzzer can exercise all paths in a program without generating all possible input. 
+
+If a fuzzer were to analyze Code Snippet 1, it could generate input that could easily exercise the path $(input>5)\land (input> 6)$ with any input greater than 6. To execute the
+path $(input>5) \land !(input>6)$, there is only one input, namely 6, that would satisfy this constraint. The randomness of the fuzzer doesn't guarantee this path will be found until
+all inputs have been tested. If this input is an int and this were a C program, this in the worst case situation could take $2^{32}$ executions. However, a symbolic execution tool could solve the constraints of the path,
+and simply return three tests that would satisfy all paths of the code snippet, for example: model($(input>5)\land (input> 6)$) = 7, model($(input>5)\land !(input> 6)$) = 6, and model($!(input>5)$) = 0.
+\begin{lstlisting}[caption={Possible Error Code}, language=C, label=snip:motivation]
+...
+if(input>5){
+    ...
+    if(input>6){
+        ...
+    }
+    else{
+        error();
+    }
+}
+...
+\end{lstlisting}
+
+A problem arises with scalability when using symbolic execution tools. If a symbolic execution tool were to analyze a large codebase, the constraints to execute path with compound and may reach a point where solving the constraints may be
+more computationally expensive than fuzzing the program. If the paths that are computationally complex to solve are executed with a reasonable high probability,
+then a fuzzer can be used to generate random input that will hit this path instead.
+
+Using these two types of tools together can lead to avoiding both situations described above. In this paper we design a workflow that would allow for concolic testing of LLVM bitcode. Concolic testing uses concrete execution combined with symbolic constraints to generate new inputs which explore a program.

@@ -1,0 +1,34 @@
+\section{Background}
+
+Concolic execution is a useful technique that uses both the concepts 
+of concrete execution and symbolic execution. Concrete execution is
+a fast testing strategy that relies on the input it is given to be 
+effective. Generally, it can take random input to hopefully cover
+all paths in question. However, this can lead to issues if the input
+distribution doesn't cover all paths uniformly. If there are several
+paths a program could take and one of them is taken on only one input
+out of the entire input space, this can lead to an issue where that path
+is never taken and is therefore never tested. Symbolic execution on the
+other hand calculates all paths a program can take. This prevents this
+issue of missing a path. Unfortunately, symbolic execution can be very
+expensive. As path conditions become more complex, it is harder to 
+solve the constraints that would produce the input to follow this path.
+With concolic execution, the advantages of these two types of tools can
+be leveraged against each other to produce a faster tool that checks more
+program paths. 
+
+Recent developments in concolic testing have looked into optimizing the
+process of switching between the concrete and symbolic sides of the tool\cite{Wang:2018:TOC:3180155.3180177}.
+By using the probability of a path being taken along with the cost of
+solving the constraint of paths, a tool can find the optimal time to
+evaluate a path using the concrete execution or the symbolic execution.
+Deciding when to choose between these tools is still an open problem.
+Currently, many tools, like KLEE \cite{cadar2008klee}, use various heuristics to 
+decide when to proceed  symbolically or concretely. 
+
+In recent years, tools like Badger \cite{Noller:2018:BCA:3213846.3213868}
+and Driller \cite{stephens2016driller} have combined symbolic execution
+with fuzzing tools. Fuzzers generate random input that should exercise
+the paths of execution of a program. Since these tools may not exercise paths
+with a low probability of execution, combing them with symbolic execution
+tools creates a concolic testing engine.

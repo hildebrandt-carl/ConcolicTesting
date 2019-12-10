@@ -1,0 +1,362 @@
+Compiling: nestIfFloat.c
+Running Dynamic Pass on: nestIfFloat.bc
+===========================================================
+
+Generating Constraints
+
+Instruction (alloca) 	:   %retval = alloca i32, align 4
+Instruction (alloca) 	:   %argc.addr = alloca i32, align 4
+Instruction (alloca) 	:   %argv.addr = alloca i8**, align 8
+Instruction (alloca) 	:   %input = alloca float, align 4
+Instruction (alloca) 	:   %x = alloca float, align 4
+Instruction (store) 	:   store i32 0, i32* %retval, align 4
+Instruction (store) 	:   store i32 %argc, i32* %argc.addr, align 4
+Instruction (store) 	:   store i8** %argv, i8*** %argv.addr, align 8
+Instruction (load) 	:   %0 = load i8**, i8*** %argv.addr, align 8
+Instruction (getelementptr) 	:   %arrayidx = getelementptr inbounds i8*, i8** %0, i64 1
+Instruction (load) 	:   %1 = load i8*, i8** %arrayidx, align 8
+Instruction (call) 	:   %call = call double @atof(i8* %1) #2
+Instruction (fptrunc) 	:   %conv = fptrunc double %call to float
+Instruction (store) 	:   store float %conv, float* %input, align 4
+Instruction (store) 	:   store float 0.000000e+00, float* %x, align 4
+Instruction (load) 	:   %2 = load float, float* %input, align 4
+Instruction (fcmp) 	:   %cmp = fcmp ogt float %2, 0.000000e+00
+Instruction (br) 	:   br i1 %cmp, label %if.then, label %if.else5
+Instruction (load) 	:   %3 = load float, float* %input, align 4
+Instruction (fcmp) 	:   %cmp2 = fcmp ogt float %3, 5.000000e+00
+Instruction (br) 	:   br i1 %cmp2, label %if.then4, label %if.else
+Instruction (load) 	:   %4 = load float, float* %input, align 4
+Instruction (fdiv) 	:   %div = fdiv float %4, 5.000000e+00
+Instruction (store) 	:   store float %div, float* %x, align 4
+Instruction (br) 	:   br label %if.end
+Instruction (load) 	:   %5 = load float, float* %input, align 4
+Instruction (fadd) 	:   %add = fadd float %5, 5.000000e+00
+Instruction (store) 	:   store float %add, float* %x, align 4
+Instruction (br) 	:   br label %if.end
+Instruction (br) 	:   br label %if.end14
+Instruction (load) 	:   %6 = load float, float* %input, align 4
+Instruction (fcmp) 	:   %cmp6 = fcmp olt float %6, -5.000000e+00
+Instruction (br) 	:   br i1 %cmp6, label %if.then8, label %if.else10
+Instruction (load) 	:   %7 = load float, float* %input, align 4
+Instruction (fsub) 	:   %sub = fsub float -0.000000e+00, %7
+Instruction (fdiv) 	:   %div9 = fdiv float %sub, 5.000000e+00
+Instruction (store) 	:   store float %div9, float* %x, align 4
+Instruction (br) 	:   br label %if.end13
+Instruction (load) 	:   %8 = load float, float* %input, align 4
+Instruction (fsub) 	:   %sub11 = fsub float -0.000000e+00, %8
+Instruction (fadd) 	:   %add12 = fadd float %sub11, 5.000000e+00
+Instruction (store) 	:   store float %add12, float* %x, align 4
+Instruction (br) 	:   br label %if.end13
+Instruction (br) 	:   br label %if.end14
+Instruction (load) 	:   %9 = load float, float* %x, align 4
+Instruction (fptosi) 	:   %conv15 = fptosi float %9 to i32
+Instruction (ret) 	:   ret i32 %conv15
+
+===========================================================
+Compiling: auxilary logging functions
+Linking to auxilary logging functions
+Displaying new program auxilary with logging functions
+===========================================================
+
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i8, align 1
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (zext) 	:   %5 = zext i1 %1 to i8
+Instruction (store) 	:   store i8 %5, i8* %4, align 1
+Instruction (load) 	:   %6 = load i8, i8* %4, align 1
+Instruction (trunc) 	:   %7 = trunc i8 %6 to i1
+Instruction (zext) 	:   %8 = zext i1 %7 to i32
+Instruction (icmp) 	:   %9 = icmp eq i32 %8, 1
+Instruction (br) 	:   br i1 %9, label %10, label %13
+Instruction (load) 	:   %11 = load i8*, i8** %3, align 8
+Instruction (call) 	:   %12 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str, i32 0, i32 0), i8* %11)
+Instruction (br) 	:   br label %16
+Instruction (load) 	:   %14 = load i8*, i8** %3, align 8
+Instruction (call) 	:   %15 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([11 x i8], [11 x i8]* @.str.1, i32 0, i32 0), i8* %14)
+Instruction (br) 	:   br label %16
+Instruction (call) 	:   %17 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i32 0, i32 0))
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i8*, align 8
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store i8* %1, i8** %4, align 8
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load i8*, i8** %4, align 8
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.3, i32 0, i32 0), i8* %5, i8* %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i32, align 4
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store i32 %1, i32* %4, align 4
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load i32, i32* %4, align 4
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.4, i32 0, i32 0), i8* %5, i32 %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i64, align 8
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store i64 %1, i64* %4, align 8
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load i64, i64* %4, align 8
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([9 x i8], [9 x i8]* @.str.5, i32 0, i32 0), i8* %5, i64 %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca float, align 4
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store float %1, float* %4, align 4
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load float, float* %4, align 4
+Instruction (fpext) 	:   %7 = fpext float %6 to double
+Instruction (call) 	:   %8 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.6, i32 0, i32 0), i8* %5, double %7)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca double, align 8
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store double %1, double* %4, align 8
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load double, double* %4, align 8
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.6, i32 0, i32 0), i8* %5, double %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %retval = alloca i32, align 4
+Instruction (alloca) 	:   %argc.addr = alloca i32, align 4
+Instruction (alloca) 	:   %argv.addr = alloca i8**, align 8
+Instruction (alloca) 	:   %input = alloca float, align 4
+Instruction (alloca) 	:   %x = alloca float, align 4
+Instruction (store) 	:   store i32 0, i32* %retval, align 4
+Instruction (store) 	:   store i32 %argc, i32* %argc.addr, align 4
+Instruction (store) 	:   store i8** %argv, i8*** %argv.addr, align 8
+Instruction (load) 	:   %0 = load i8**, i8*** %argv.addr, align 8
+Instruction (getelementptr) 	:   %arrayidx = getelementptr inbounds i8*, i8** %0, i64 1
+Instruction (load) 	:   %1 = load i8*, i8** %arrayidx, align 8
+Instruction (call) 	:   %call = call double @atof(i8* %1) #3
+Instruction (fptrunc) 	:   %conv = fptrunc double %call to float
+Instruction (store) 	:   store float %conv, float* %input, align 4
+Instruction (store) 	:   store float 0.000000e+00, float* %x, align 4
+Instruction (load) 	:   %2 = load float, float* %input, align 4
+Instruction (call) 	:   call void @print_string(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @0, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @1, i32 0, i32 0))
+Instruction (call) 	:   call void @print_float(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @2, i32 0, i32 0), float %2)
+Instruction (call) 	:   call void @print_float(i8* getelementptr inbounds ([19 x i8], [19 x i8]* @3, i32 0, i32 0), float 0.000000e+00)
+Instruction (fcmp) 	:   %cmp = fcmp ogt float %2, 0.000000e+00
+Instruction (call) 	:   call void @print_boolean(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @4, i32 0, i32 0), i1 %cmp)
+Instruction (br) 	:   br i1 %cmp, label %if.then, label %if.else5
+Instruction (load) 	:   %3 = load float, float* %input, align 4
+Instruction (call) 	:   call void @print_string(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @5, i32 0, i32 0), i8* getelementptr inbounds ([17 x i8], [17 x i8]* @6, i32 0, i32 0))
+Instruction (call) 	:   call void @print_float(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @7, i32 0, i32 0), float %3)
+Instruction (call) 	:   call void @print_float(i8* getelementptr inbounds ([19 x i8], [19 x i8]* @8, i32 0, i32 0), float 5.000000e+00)
+Instruction (fcmp) 	:   %cmp2 = fcmp ogt float %3, 5.000000e+00
+Instruction (call) 	:   call void @print_boolean(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @9, i32 0, i32 0), i1 %cmp2)
+Instruction (br) 	:   br i1 %cmp2, label %if.then4, label %if.else
+Instruction (load) 	:   %4 = load float, float* %input, align 4
+Instruction (fdiv) 	:   %div = fdiv float %4, 5.000000e+00
+Instruction (store) 	:   store float %div, float* %x, align 4
+Instruction (br) 	:   br label %if.end
+Instruction (load) 	:   %5 = load float, float* %input, align 4
+Instruction (fadd) 	:   %add = fadd float %5, 5.000000e+00
+Instruction (store) 	:   store float %add, float* %x, align 4
+Instruction (br) 	:   br label %if.end
+Instruction (br) 	:   br label %if.end14
+Instruction (load) 	:   %6 = load float, float* %input, align 4
+Instruction (call) 	:   call void @print_string(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @10, i32 0, i32 0), i8* getelementptr inbounds ([18 x i8], [18 x i8]* @11, i32 0, i32 0))
+Instruction (call) 	:   call void @print_float(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @12, i32 0, i32 0), float %6)
+Instruction (call) 	:   call void @print_float(i8* getelementptr inbounds ([20 x i8], [20 x i8]* @13, i32 0, i32 0), float -5.000000e+00)
+Instruction (fcmp) 	:   %cmp6 = fcmp olt float %6, -5.000000e+00
+Instruction (call) 	:   call void @print_boolean(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @14, i32 0, i32 0), i1 %cmp6)
+Instruction (br) 	:   br i1 %cmp6, label %if.then8, label %if.else10
+Instruction (load) 	:   %7 = load float, float* %input, align 4
+Instruction (fsub) 	:   %sub = fsub float -0.000000e+00, %7
+Instruction (fdiv) 	:   %div9 = fdiv float %sub, 5.000000e+00
+Instruction (store) 	:   store float %div9, float* %x, align 4
+Instruction (br) 	:   br label %if.end13
+Instruction (load) 	:   %8 = load float, float* %input, align 4
+Instruction (fsub) 	:   %sub11 = fsub float -0.000000e+00, %8
+Instruction (fadd) 	:   %add12 = fadd float %sub11, 5.000000e+00
+Instruction (store) 	:   store float %add12, float* %x, align 4
+Instruction (br) 	:   br label %if.end13
+Instruction (br) 	:   br label %if.end14
+Instruction (load) 	:   %9 = load float, float* %x, align 4
+Instruction (fptosi) 	:   %conv15 = fptosi float %9 to i32
+Instruction (ret) 	:   ret i32 %conv15
+
+===========================================================
+Running instrumented code
+===========================================================
+
+Constraint Hit: input > 0.000000
+Operand (input): 1.000000
+Operand (0.000000): 0.000000
+Predicate Evaluation: True
+-----------------------
+Constraint Hit: input > 5.000000
+Operand (input): 1.000000
+Operand (5.000000): 5.000000
+Predicate Evaluation: False
+-----------------------
+ ✘ parallels@parallels-Parallels-Virtual-Platform  ~/llvm/Test_Programs  ./run_dynamic.sh -f nestIfInt.c -i 1  
+[18/18] Running utility command for ocaml_llvm_executionengine
+/home/parallels/llvm/Test_Programs
+Compiling: nestIfInt.c
+Running Dynamic Pass on: nestIfInt.bc
+===========================================================
+
+Generating Constraints
+
+Instruction (alloca) 	:   %retval = alloca i32, align 4
+Instruction (alloca) 	:   %argc.addr = alloca i32, align 4
+Instruction (alloca) 	:   %argv.addr = alloca i8**, align 8
+Instruction (alloca) 	:   %input = alloca i32, align 4
+Instruction (alloca) 	:   %x = alloca i32, align 4
+Instruction (store) 	:   store i32 0, i32* %retval, align 4
+Instruction (store) 	:   store i32 %argc, i32* %argc.addr, align 4
+Instruction (store) 	:   store i8** %argv, i8*** %argv.addr, align 8
+Instruction (load) 	:   %0 = load i8**, i8*** %argv.addr, align 8
+Instruction (getelementptr) 	:   %arrayidx = getelementptr inbounds i8*, i8** %0, i64 1
+Instruction (load) 	:   %1 = load i8*, i8** %arrayidx, align 8
+Instruction (call) 	:   %call = call i32 @atoi(i8* %1) #2
+Instruction (store) 	:   store i32 %call, i32* %input, align 4
+Instruction (store) 	:   store i32 0, i32* %x, align 4
+Instruction (load) 	:   %2 = load i32, i32* %input, align 4
+Instruction (icmp) 	:   %cmp = icmp sgt i32 %2, 0
+Instruction (br) 	:   br i1 %cmp, label %if.then, label %if.else6
+Instruction (load) 	:   %3 = load i32, i32* %input, align 4
+Instruction (icmp) 	:   %cmp1 = icmp sgt i32 %3, 5
+Instruction (br) 	:   br i1 %cmp1, label %if.then2, label %if.else
+Instruction (load) 	:   %4 = load i32, i32* %input, align 4
+Instruction (icmp) 	:   %cmp3 = icmp slt i32 %4, 3
+Instruction (br) 	:   br i1 %cmp3, label %if.then4, label %if.end
+Instruction (store) 	:   store i32 2, i32* %x, align 4
+Instruction (br) 	:   br label %if.end
+Instruction (br) 	:   br label %if.end5
+Instruction (store) 	:   store i32 1, i32* %x, align 4
+Instruction (br) 	:   br label %if.end5
+Instruction (br) 	:   br label %if.end7
+Instruction (store) 	:   store i32 3, i32* %x, align 4
+Instruction (br) 	:   br label %if.end7
+Instruction (load) 	:   %5 = load i32, i32* %x, align 4
+Instruction (ret) 	:   ret i32 %5
+
+===========================================================
+Compiling: auxilary logging functions
+Linking to auxilary logging functions
+Displaying new program auxilary with logging functions
+===========================================================
+
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i8, align 1
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (zext) 	:   %5 = zext i1 %1 to i8
+Instruction (store) 	:   store i8 %5, i8* %4, align 1
+Instruction (load) 	:   %6 = load i8, i8* %4, align 1
+Instruction (trunc) 	:   %7 = trunc i8 %6 to i1
+Instruction (zext) 	:   %8 = zext i1 %7 to i32
+Instruction (icmp) 	:   %9 = icmp eq i32 %8, 1
+Instruction (br) 	:   br i1 %9, label %10, label %13
+Instruction (load) 	:   %11 = load i8*, i8** %3, align 8
+Instruction (call) 	:   %12 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([10 x i8], [10 x i8]* @.str, i32 0, i32 0), i8* %11)
+Instruction (br) 	:   br label %16
+Instruction (load) 	:   %14 = load i8*, i8** %3, align 8
+Instruction (call) 	:   %15 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([11 x i8], [11 x i8]* @.str.1, i32 0, i32 0), i8* %14)
+Instruction (br) 	:   br label %16
+Instruction (call) 	:   %17 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([25 x i8], [25 x i8]* @.str.2, i32 0, i32 0))
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i8*, align 8
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store i8* %1, i8** %4, align 8
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load i8*, i8** %4, align 8
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.3, i32 0, i32 0), i8* %5, i8* %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i32, align 4
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store i32 %1, i32* %4, align 4
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load i32, i32* %4, align 4
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.4, i32 0, i32 0), i8* %5, i32 %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca i64, align 8
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store i64 %1, i64* %4, align 8
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load i64, i64* %4, align 8
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([9 x i8], [9 x i8]* @.str.5, i32 0, i32 0), i8* %5, i64 %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca float, align 4
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store float %1, float* %4, align 4
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load float, float* %4, align 4
+Instruction (fpext) 	:   %7 = fpext float %6 to double
+Instruction (call) 	:   %8 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.6, i32 0, i32 0), i8* %5, double %7)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %3 = alloca i8*, align 8
+Instruction (alloca) 	:   %4 = alloca double, align 8
+Instruction (store) 	:   store i8* %0, i8** %3, align 8
+Instruction (store) 	:   store double %1, double* %4, align 8
+Instruction (load) 	:   %5 = load i8*, i8** %3, align 8
+Instruction (load) 	:   %6 = load double, double* %4, align 8
+Instruction (call) 	:   %7 = call i32 (i8*, ...) @printf(i8* getelementptr inbounds ([8 x i8], [8 x i8]* @.str.6, i32 0, i32 0), i8* %5, double %6)
+Instruction (ret) 	:   ret void
+Instruction (alloca) 	:   %retval = alloca i32, align 4
+Instruction (alloca) 	:   %argc.addr = alloca i32, align 4
+Instruction (alloca) 	:   %argv.addr = alloca i8**, align 8
+Instruction (alloca) 	:   %input = alloca i32, align 4
+Instruction (alloca) 	:   %x = alloca i32, align 4
+Instruction (store) 	:   store i32 0, i32* %retval, align 4
+Instruction (store) 	:   store i32 %argc, i32* %argc.addr, align 4
+Instruction (store) 	:   store i8** %argv, i8*** %argv.addr, align 8
+Instruction (load) 	:   %0 = load i8**, i8*** %argv.addr, align 8
+Instruction (getelementptr) 	:   %arrayidx = getelementptr inbounds i8*, i8** %0, i64 1
+Instruction (load) 	:   %1 = load i8*, i8** %arrayidx, align 8
+Instruction (call) 	:   %call = call i32 @atoi(i8* %1) #3
+Instruction (store) 	:   store i32 %call, i32* %input, align 4
+Instruction (store) 	:   store i32 0, i32* %x, align 4
+Instruction (load) 	:   %2 = load i32, i32* %input, align 4
+Instruction (call) 	:   call void @print_string(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @0, i32 0, i32 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @1, i32 0, i32 0))
+Instruction (call) 	:   call void @print_i32(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @2, i32 0, i32 0), i32 %2)
+Instruction (call) 	:   call void @print_i32(i8* getelementptr inbounds ([12 x i8], [12 x i8]* @3, i32 0, i32 0), i32 0)
+Instruction (icmp) 	:   %cmp = icmp sgt i32 %2, 0
+Instruction (call) 	:   call void @print_boolean(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @4, i32 0, i32 0), i1 %cmp)
+Instruction (br) 	:   br i1 %cmp, label %if.then, label %if.else6
+Instruction (load) 	:   %3 = load i32, i32* %input, align 4
+Instruction (call) 	:   call void @print_string(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @5, i32 0, i32 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @6, i32 0, i32 0))
+Instruction (call) 	:   call void @print_i32(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @7, i32 0, i32 0), i32 %3)
+Instruction (call) 	:   call void @print_i32(i8* getelementptr inbounds ([12 x i8], [12 x i8]* @8, i32 0, i32 0), i32 5)
+Instruction (icmp) 	:   %cmp1 = icmp sgt i32 %3, 5
+Instruction (call) 	:   call void @print_boolean(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @9, i32 0, i32 0), i1 %cmp1)
+Instruction (br) 	:   br i1 %cmp1, label %if.then2, label %if.else
+Instruction (load) 	:   %4 = load i32, i32* %input, align 4
+Instruction (call) 	:   call void @print_string(i8* getelementptr inbounds ([15 x i8], [15 x i8]* @10, i32 0, i32 0), i8* getelementptr inbounds ([10 x i8], [10 x i8]* @11, i32 0, i32 0))
+Instruction (call) 	:   call void @print_i32(i8* getelementptr inbounds ([16 x i8], [16 x i8]* @12, i32 0, i32 0), i32 %4)
+Instruction (call) 	:   call void @print_i32(i8* getelementptr inbounds ([12 x i8], [12 x i8]* @13, i32 0, i32 0), i32 3)
+Instruction (icmp) 	:   %cmp3 = icmp slt i32 %4, 3
+Instruction (call) 	:   call void @print_boolean(i8* getelementptr inbounds ([21 x i8], [21 x i8]* @14, i32 0, i32 0), i1 %cmp3)
+Instruction (br) 	:   br i1 %cmp3, label %if.then4, label %if.end
+Instruction (store) 	:   store i32 2, i32* %x, align 4
+Instruction (br) 	:   br label %if.end
+Instruction (br) 	:   br label %if.end5
+Instruction (store) 	:   store i32 1, i32* %x, align 4
+Instruction (br) 	:   br label %if.end5
+Instruction (br) 	:   br label %if.end7
+Instruction (store) 	:   store i32 3, i32* %x, align 4
+Instruction (br) 	:   br label %if.end7
+Instruction (load) 	:   %5 = load i32, i32* %x, align 4
+Instruction (ret) 	:   ret i32 %5
+
+===========================================================
+Running instrumented code
+===========================================================
+
+Constraint Hit: input > 0
+Operand (input): 1
+Operand (0): 0
+Predicate Evaluation: True
+-----------------------
+Constraint Hit: input > 5
+Operand (input): 1
+Operand (5): 5
+Predicate Evaluation: False
+-----------------------
+

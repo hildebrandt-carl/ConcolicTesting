@@ -1,0 +1,67 @@
+
+\section{Implementation}
+
+Both the dynamic and the static pass were implemented in LLVM 7. In order to test our approaches we built LLVM from source and inserted our pass into the transforms directory of LLVM. Both passes were similar in that they iterated through instructions and identified different instruction types. In this section we will describe how each of the instructions were handled for both passes. We will also describe how the dynamic logging instructions were instrumented into the original program using LLVM.
+
+\subsection{Inserting Logging Instructions}
+
+The dynamic pass instrumented a program with logging functions to determine the symbolic constraints evaluated by the program, as well as their value during the program execution. Code Snippet~\ref{snip:original} shows a comparison instruction fcmp which inherits from the base comparison instruction class. We can see that it checks if the local variable $\%2$ is equivalent to the floating value $0.0$. The result of that $\%cmp$ is then used to determine if the program should branch or not.
+
+\vspace{-0.6cm}
+
+\begin{lstlisting}[caption={Original Branching Code}, label=snip:original]
+Inst (fcmp): %cmp = fcmp oeq float %2, 0.0
+Inst (br): br i1 %cmp, label %if.then, label %if.else
+\end{lstlisting}
+
+
+Our dynamic pass worked by inserting instructions which made calls to logging functions in a logging library we created. The logging library contained the declaration of multiple logging functions which we could use depending on the circumstances. For instance when a compare instruction was reached we printed out both the symbolic constraint, as well as each of the constraints run time values. The first step was to generate the symbolic constraint in a string presentation. This is done by taking the operands, finding if they are constant or local values, and then converting them to human readable form. The predicate is converted using an enumeration described by the LLVM predicate documentation.
+
+We then insert the function call $@print\_string$ as seen in line 1 of Code Snippet~\ref{snip:instrumented}. We can see that $@print\_string$ takes two arguments $@0$ and $@1$ which are computed based on the $fcmps$ operands. Next we need to determine the value of both operands during the program execution. To do this we pass both operands to logging functions of the appropriate type. As we know the operands are 32 bit floating points we call the $@print\_float$ function. This function takes in a string and a 32 bit floating point value. We can see that the first call to the logging function in line 2 takes the first operand of the $fcmp$ in line 4, while the second call to the logging function prints out the second operand of the $fcmp$. These logging functions would thus print out the both the symbolic constraints as well as the runtime value of each operand.
+
+
+\vspace{-0.6cm}
+
+\begin{lstlisting}[caption={New Equivalent Instrumented Code}, label=snip:instrumented][H]
+Inst (call): call void @print_string(i8*...@0, i8*...@1)
+Inst (call): call void @print_float(i8*...@2, i32...%2)
+Inst (call): call void @print_float(i8*...@3, i32...0.0)
+Inst (fcmp): %cmp = fcmp oeq float %2, 0.0
+Inst (call): call void @print_bool(i8*...@4, i1...%cmp)
+Inst (br): br i1 %cmp, label %if.then, label %if.else
+\end{lstlisting}
+
+Finally in order to know the result of the compare statement in line 4 of Code Snippet~\ref{snip:instrumented}, we need to insert one final logging function. The result of the $fcmp$ is a 1 bit integer as seen in line 6. We thus call the appropriate logging function $print\_bool$ which takes in a 1 bit integer.
+
+\subsection{Load Instruction}
+
+The first instruction both Algorithm~\ref{alg:dynamic_overview} and \ref{alg:static_overview} consider is a load instruction\cite{loadinstruction}. Each time a load instruction was identified we kept track of which variables were being loaded into new memory locations. A typical example is shown below in Code Snippet~\ref{snip:load}. In this example you can see that a local variable $\%input$ is being loaded into another local variable $\%2$. The next instruction in line 2, a compare instruction, uses the local variable $\%2$. However, in order to print out the constraints for the compare instruction we need to know that the local variable $\%2$ is in fact $\%input$.
+
+\vspace{-0.6cm}
+
+\begin{lstlisting}[escapechar=@, caption={Load Instruction}, label=snip:load]
+Inst (load): %2 = load i32, i32* %input, align 4
+Inst (icmp): %cmp = icmp sgt i32 %2, 0
+\end{lstlisting}
+
+In order to keep track of these mappings we create a vector of pairings. Each pair consists of a memory location and a variable name. For instance in Line 1 when $\%input$ is stored into $\%2$, a mapping between the local variables name $\%input$ and the memory address of local variable $\%2$ is created. Thus when the local variable $\%2$ is used, our algorithm can search through the vector of known mappings and identify the variable name which is being used in any future instruction. Doing this allows us track of variables throughout the program.
+
+\subsection{Compare Instruction}
+
+Compare instructions, like the one seen line 2 of Code Snippet~\ref{snip:load}, are points in the program where local variables are compared. When compare instructions are paired with a branch instruction they create branches whose execution depends on the compare instruction result. Our technique thus needs to generate a symbolic constraint for each of the compare instructions. The LLVM pass we implemented checks if the instruction is a compare instruction\cite{compareinstruction}. We used the base compare instruction which all other compares inherit from, allowing us to keep the LLVM pass general. Our pass then iterates through each of the operands. If the operand is a constant value it is converted to either a constant integer or float depending on the type. If the operand is a local variable if a name can not be generated from the actual operand directly we search through the known local variable mappings. The final step is to determine the type of predicate which is used. We used the enum of predicates defined by LLVM to decode the predicate from an integer into a human readable string.
+
+\subsection{Branch Instruction}
+
+The last instruction we considered were branch instructions\cite{branchinstruction}. Branch instructions were only considered by the dynamic pass as we needed to evaluate them at runtime. Code Snippet~\ref{snip:branch} shows an example of a branch instruction. 
+
+\begin{lstlisting}[escapechar=@, caption={Branch Instruction}, label=snip:branch]
+Inst (icmp): %2 = icmp sgt i32 %1, 0
+// Print will be inserted here by logging
+Inst (br): br i1 %2, label %if.then, label %if.else
+\end{lstlisting}
+
+ We can see that we are interested in the value of $\%2$, as this will determine whether the program branches or not. We are able to get the get the memory location of the local variable $\%2$ by requesting the branch condition and converting it to an LLVM value type. This type is then passed to our logging function which then inserts a print instruction inbetween lines 1 and 3. The logging function will then evaluate the value of $\%2$ at runtime.
+
+
+
+

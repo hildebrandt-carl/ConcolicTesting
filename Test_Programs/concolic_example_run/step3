@@ -1,0 +1,15 @@
+Constraint Hit: input > 0
+Operand (input): 6
+Operand (0): 0
+Predicate Evaluation: True
+-----------------------
+Constraint Hit: input > 5
+Operand (input): 6
+Operand (5): 5
+Predicate Evaluation: True
+-----------------------
+Constraint Hit: input < 3
+Operand (input): 6
+Operand (3): 3
+Predicate Evaluation: False
+-----------------------

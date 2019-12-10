@@ -1,0 +1,18 @@
+\begin{abstract}
+  Concolic Execution is a testing strategy that utilizes both concrete
+  testing and symbolic execution to make up for the shortcomings of each
+  technique. Concrete execution is as fast as the program in question. 
+  However, if inputs are being generated at random, it may take far
+  too many tests to satisfy all paths of execution. Symbolic execution 
+  can find all paths of execution. However, this can be computationally 
+  expensive. Concolic execution leverages one against the other. Symbolic 
+  execution can find the paths in which concrete testing has difficulty
+  reaching. Concrete execution can execute the hard to solve paths. Many
+  concolic execution tools target a specific language. This can lead to
+  time spent re-targeting tools to other languages. LLVM is a compiler
+  infrastructure that allows for creation of compilers that produce 
+  the same intermediate representation, LLVM bitcode. In this paper, we 
+  design a concolic execution strategy that can be used on LLVM bitcode.
+  This will allow for a concolic execution tool that can be used on
+  languages that can be compiled into LLVM bitcode.
+\end{abstract}

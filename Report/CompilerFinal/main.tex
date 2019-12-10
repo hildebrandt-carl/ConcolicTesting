@@ -1,0 +1,79 @@
+\documentclass[sigconf]{acmart}
+
+\usepackage[linesnumbered,ruled]{algorithm2e}
+\usepackage{listings}
+
+%Defining Colors used by listing package
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ breaklines=true,
+basicstyle=\footnotesize,
+numbers=left,
+frame=single,
+showstringspaces=falsebasicstyle=\ttfamily,
+keywordstyle=\color{blue}\ttfamily,
+stringstyle=\color{red}\ttfamily,
+commentstyle=\color{green}\ttfamily,
+morecomment=[l][\color{magenta}]{\#}}
+
+\renewcommand{\lstlistingname}{Code Snippet}% Listing -> Algorithm
+\renewcommand{\lstlistlistingname}{List of \lstlistingname s}% List of Listings -> List of Algorithms
+
+\AtBeginDocument{%
+  \providecommand\BibTeX{{%
+    \normalfont B\kern-0.5em{\scshape i\kern-0.25em b}\kern-0.8em\TeX}}}
+
+\setcopyright{acmcopyright}
+\copyrightyear{2018}
+\acmYear{2018}
+\acmDOI{10.1145/1122445.1122456}
+
+\acmConference[CS6161]{UVA '19: CS6161 - Compilers}{December 06, 2019}{Charlottesville, VA}
+\acmBooktitle{UVA '19: CS6161 - Compilers,
+  December 06, 2019, Charlottesville, VA}
+\acmPrice{0.00}
+\acmISBN{978-1-4503-9999-9/18/06}
+
+\begin{document}
+\title{Compilers Final Project - Concolic Testing in LLVM }
+
+\author{Carl Hildebrandt}
+\affiliation{\institution{The University of Virginia}}
+\email{ch6wd@virginia.edu}
+
+\author{Will Leeson}
+\affiliation{\institution{The University of Virginia}}
+\email{wel2vw@virginia.edu}
+
+\newcommand{\CH}[1]{{\color{red}CH: #1}}
+\newcommand{\WL}[1]{{\color{blue}WL: #1}}
+
+\input{text/abstract.tex}
+
+\keywords{Concolic Execution, LLVM, Static Analysis, Dynamic Analysis, Compilers}
+
+\maketitle
+
+\input{text/introduction.tex}
+
+\input{text/motivation.tex}
+
+\input{text/background.tex}
+
+\input{text/problem.tex}
+
+\input{text/approach.tex}
+
+\input{text/implementation.tex}
+
+\input{text/study.tex}
+
+\input{text/conclusion.tex}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{bibliography.bib}
+
+\end{document}
+\endinput
