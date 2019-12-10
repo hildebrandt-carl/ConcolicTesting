@@ -1,7 +1,7 @@
 
 \section{Implementation}
 
-Both the dynamic and the static pass were implemented in LLVM 7. In order to test our approaches we built LLVM from source and inserted our pass into the transforms directory of LLVM. Both passes were similar in that they iterated through instructions and identified different instruction types. In this section we will describe how each of the instructions were handled for both passes. We will also describe how the dynamic logging instructions were instrumented into the original program using LLVM.
+Both the dynamic and the static pass were implemented in LLVM 7. In order to test our approaches we built LLVM from source and inserted our pass into the transforms directory of LLVM. Both passes were similar in that they iterated through instructions and identified different instruction types. In this section we will describe how each of the instructions were handled for both passes. We will also describe how the dynamic logging instructions were instrumented into the original program using LLVM. All code is available at: \url{https://github.com/hildebrandt-carl/concolic_testing}
 
 \subsection{Inserting Logging Instructions}
 
@@ -20,7 +20,7 @@ Our dynamic pass worked by inserting instructions which made calls to logging fu
 We then insert the function call $@print\_string$ as seen in line 1 of Code Snippet~\ref{snip:instrumented}. We can see that $@print\_string$ takes two arguments $@0$ and $@1$ which are computed based on the $fcmps$ operands. Next we need to determine the value of both operands during the program execution. To do this we pass both operands to logging functions of the appropriate type. As we know the operands are 32 bit floating points we call the $@print\_float$ function. This function takes in a string and a 32 bit floating point value. We can see that the first call to the logging function in line 2 takes the first operand of the $fcmp$ in line 4, while the second call to the logging function prints out the second operand of the $fcmp$. These logging functions would thus print out the both the symbolic constraints as well as the runtime value of each operand.
 
 
-\vspace{-0.6cm}
+\vspace{-0.4cm}
 
 \begin{lstlisting}[caption={New Equivalent Instrumented Code}, label=snip:instrumented][H]
 Inst (call): call void @print_string(i8*...@0, i8*...@1)
@@ -53,6 +53,7 @@ Compare instructions, like the one seen line 2 of Code Snippet~\ref{snip:load}, 
 \subsection{Branch Instruction}
 
 The last instruction we considered were branch instructions\cite{branchinstruction}. Branch instructions were only considered by the dynamic pass as we needed to evaluate them at runtime. Code Snippet~\ref{snip:branch} shows an example of a branch instruction. 
+\vspace{-0.3cm}
 
 \begin{lstlisting}[escapechar=@, caption={Branch Instruction}, label=snip:branch]
 Inst (icmp): %2 = icmp sgt i32 %1, 0
