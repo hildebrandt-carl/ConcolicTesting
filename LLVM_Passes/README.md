@@ -13,11 +13,6 @@ $ sudo apt-get install libffi6 libffi-dev
 
 ## Installing Clang and LLVM
 
-Make a installation folder
-```
-$ mkdir -p llvm/src/tools/clang
-```
-
 Download LLVM and Clang source code
 ```
 $ wget http://releases.llvm.org/7.0.1/llvm-7.0.1.src.tar.xz
