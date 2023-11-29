@@ -13,7 +13,7 @@ This project contains the code used in Will and I's final compilers project. The
 
 For more information read our final report:
 
-[![paper](./cover.png)](./Report/)
+[![paper](./cover.png)](./Report/CompilerFinal.pdf)
 
 ## Authors
 
