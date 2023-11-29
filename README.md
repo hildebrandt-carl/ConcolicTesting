@@ -9,9 +9,11 @@ This project contains the code used in Will and I's final compilers project. The
 * [Test Programs](./Test_Programs) - Contains the test programs and the results which were used to test this project.
 * [Report](./Report) - Contains the final report for this project.
 
-## Video
+## Report
 
-Coming Soon
+For more information read our final report:
+
+[![paper](./cover.png)](./Report/)
 
 ## Authors
 
